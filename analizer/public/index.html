@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>analizer — Spotify Playlist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <header class="top">
+    <p class="brand">analizer</p>
+    <p class="tag">Легальный разбор плейлистов Spotify · только метаданные API и ваши локальные файлы</p>
+  </header>
+
+  <main>
+    <section class="panel" id="analyze-section">
+      <h1>Плейлист</h1>
+      <p class="lede">Вставьте публичный URL или ID — отметим explicit / clean по данным Spotify.</p>
+      <form id="analyze-form" class="row">
+        <input
+          id="playlist"
+          name="playlist"
+          type="url"
+          placeholder="https://open.spotify.com/playlist/…"
+          required
+          autocomplete="off"
+        />
+        <button type="submit" id="analyze-btn">Анализировать</button>
+      </form>
+      <p id="analyze-error" class="error" hidden></p>
+      <div id="summary" class="summary" hidden></div>
+      <div id="tracks" class="tracks" hidden></div>
+    </section>
+
+    <section class="panel" id="package-section">
+      <h2>Локальные файлы</h2>
+      <p class="lede">
+        Загрузите <strong>уже имеющиеся у вас</strong> MP3 или M4A (AAC, не ALAC).
+        Мы переименуем в <code>Artist - Title.ext</code> и отдадим ZIP для Spotify Local Files.
+        Никакого поиска и скачивания из интернета.
+      </p>
+      <form id="package-form">
+        <label class="file-drop">
+          <input id="files" name="files" type="file" accept=".mp3,.m4a,audio/mpeg,audio/mp4,audio/x-m4a" multiple required />
+          <span>Выбрать MP3 / M4A</span>
+        </label>
+        <ul id="file-list" class="file-list"></ul>
+        <button type="submit" id="package-btn" disabled>Упаковать в ZIP</button>
+      </form>
+      <p id="package-error" class="error" hidden></p>
+      <p id="package-ok" class="ok" hidden></p>
+    </section>
+
+    <section class="panel thin">
+      <h2>Границы</h2>
+      <ul class="bounds">
+        <li>✔ Spotify Web API (Client Credentials) — метаданные публичных плейлистов</li>
+        <li>✔ Упаковка ваших локальных аудио для Local Files</li>
+        <li>✖ Поиск на пиратских / «бесплатных MP3» сайтах</li>
+        <li>✖ Скачивание чужих треков из интернета</li>
+        <li>✖ Парсинг lyric-сайтов ради «uncensored» аудио</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Форматы упаковки: предпочтительно <strong>MP3</strong>, также <strong>M4A (AAC)</strong>. ALAC не принимается.</p>
+  </footer>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
